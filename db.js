@@ -12,21 +12,29 @@ const sequelize = new Sequelize("nodejs_demo", MYSQL_USERNAME, MYSQL_PASSWORD, {
 });
 
 // 定义数据模型
-const Counter = sequelize.define("Counter", {
-  count: {
-    type: DataTypes.INTEGER,
+const User = sequelize.define("User", {
+  username: {
+    type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 1,
+    primaryKey: true
   },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  chinesename: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 });
 
 // 数据库初始化方法
 async function init() {
-  await Counter.sync({ alter: true });
+  await User.sync({ alter: true });
 }
 
 // 导出初始化方法和模型
 module.exports = {
   init,
-  Counter,
+  User,
 };
